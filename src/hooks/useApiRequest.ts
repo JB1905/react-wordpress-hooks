@@ -7,9 +7,9 @@ import { serializeOptions, passToBody } from '../utils';
 
 import { RequestMethod } from '../enums/RequestMethod';
 
-interface Params {
+interface Params<T> {
   readonly id?: number | string;
-  readonly options?: object | number;
+  readonly options?: T | number;
   readonly requsetMethod?: string;
   readonly endpoint?: string;
 }
@@ -20,12 +20,12 @@ interface WPResponse {
   headers?: Headers;
 }
 
-export const useApiRequest = ({
+export const useApiRequest = <T extends object>({
   id,
   options,
   requsetMethod = RequestMethod.Get,
   endpoint = '',
-}: Params) => {
+}: Params<T>) => {
   const { url, headers } = useSafeContext(WordPressContext);
 
   const [loading, setLoading] = useState(false);

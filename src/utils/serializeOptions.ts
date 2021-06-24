@@ -1,4 +1,4 @@
-export const serializeOptions = (options: object) => {
+export const serializeOptions = <T extends object>(options: T) => {
   const parts: string[] = [];
 
   Object.entries(options).map(([key, value]) => {
